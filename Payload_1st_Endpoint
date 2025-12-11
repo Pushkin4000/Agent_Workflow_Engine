@@ -3,13 +3,15 @@
     "extract_functions",
     "check_complexity",
     "detect_issues",
-    "suggest_improvements"
+    "suggest_improvements",
+    "check_and_loop"
   ],
   "edges": {
     "extract_functions": "check_complexity",
     "check_complexity": "detect_issues",
     "detect_issues": "suggest_improvements",
-    "suggest_improvements": null
+    "suggest_improvements": "check_and_loop",  
+    "check_and_loop": null
   },
   "start_node": "extract_functions"
 }

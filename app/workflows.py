@@ -11,7 +11,7 @@ class Code_Review_State(TypedDict):
     quality_score: float
     threshold: int
     suggestions: list
-
+    loop_count: int
 
 # Node 1- Extracting functions  
 def extract_functions(state: Code_Review_State) -> Code_Review_State:
@@ -63,11 +63,27 @@ def suggest_improvements(state: Code_Review_State) -> Code_Review_State:
     return state
 
 
+# Node-5 check and loop
+def check_and_loop(state: Code_Review_State) -> Code_Review_State:
+    loop_count = state.get("loop_count", 0)
+    
+    # If quality is good OR looped 3 times, STOP
+    if state["quality_score"] >= state["threshold"] or loop_count >= 3:
+        state["_next"] = None  # End workflow
+    else:
+        # Loop back to start
+        state["loop_count"] = loop_count + 1
+        state["issues"] = max(0, state["issues"] - 1)  # Simulating improvement which is done here to because of constrain of time.
+        state["_next"] = "extract_functions"  # Loop back
+    
+    return state
+
 NODE_REGISTRY = {
     "extract_functions": extract_functions,
     "check_complexity": check_complexity,
     "detect_issues": detect_issues,
-    "suggest_improvements": suggest_improvements
+    "suggest_improvements": suggest_improvements,
+    "check_and_loop": check_and_loop
 }
 
 
@@ -75,7 +91,8 @@ edges = {
     "extract_functions": "check_complexity",
     "check_complexity": "detect_issues",
     "detect_issues": "suggest_improvements",
-    "suggest_improvements": None
+    "suggest_improvements": "check_and_loop",  
+    "check_and_loop": None
 }
 
 
