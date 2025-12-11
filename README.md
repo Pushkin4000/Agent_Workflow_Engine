@@ -11,7 +11,7 @@ pip install -r .\requirements.txt
 
 ### 2. Start the Server
 ```bash
-uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
 ```
 Server will run at `http://localhost:8000`
 add .doc at the end to test the api
