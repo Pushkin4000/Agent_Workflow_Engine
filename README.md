@@ -4,6 +4,14 @@ A minimal workflow engine for automated code review with looping and branching c
 
 ## How to Run
 
+### 0. Clone the Repository
+Replace the URL with your repository URL if needed:
+
+```bash
+git clone https://github.com/Pushkin4000/Agent_Workflow_Engine.git
+cd agent_workflow_engine
+
+
 ### 1. Install Dependencies
 ```bash
 pip install -r .\requirements.txt
