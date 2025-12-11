@@ -43,8 +43,9 @@ def suggest_improvements(state: Code_Review_State) -> Code_Review_State:
     suggestions = []
     
     #Check out the tools.py for it's working.
-    TOOL_REGISTRY["quality_scorer_tool"](state)
+    TOOL_REGISTRY["quality_scorer_tool"](state)  
     
+    #the if conditions to give suggestions.
     if state["issues"] > 0:
         suggestions.append(f"Remove and fix {state['issues']} TODO/FIXME comments present in code.")
     
@@ -55,7 +56,8 @@ def suggest_improvements(state: Code_Review_State) -> Code_Review_State:
         suggestions.append("No functions found, add functions/modularize code.")
     
     if state["quality_score"] < state["threshold"]:
-        suggestions.append(f"Quality score {q:.1f} is below threshold {state['threshold']}, use some help from the web.")
+        suggestions.append(f"Quality score {state['quality_score']:.1f} is below threshold {state['threshold']}, use some help from the web and write better functions to improve this score.")
+    # above used state['quality_score'] instead of q coz q is out of scope here.
     
     state["suggestions"] = suggestions
     return state
@@ -126,7 +128,7 @@ def complex_function():
         "avg_complexity": 0.0,
         "issues": 0,
         "quality_score": 0.0,
-        "threshold": 70,
+        "threshold": 80,
         "suggestions": []
     }
     
