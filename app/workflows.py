@@ -1,5 +1,5 @@
 from typing import TypedDict
-from tools import TOOL_REGISTRY
+from app.tools import TOOL_REGISTRY
 
 # The state model 
 
@@ -58,7 +58,7 @@ def suggest_improvements(state: Code_Review_State) -> Code_Review_State:
     if state["quality_score"] < state["threshold"]:
         suggestions.append(f"Quality score {state['quality_score']:.1f} is below threshold {state['threshold']}, use some help from the web and write better functions to improve this score.")
     # above used state['quality_score'] instead of q coz q is out of scope here.
-    
+
     state["suggestions"] = suggestions
     return state
 
@@ -98,55 +98,46 @@ def run_graph(start_node: str, edges: dict, state: dict, max_steps: int = 100):
 
 
 
-# At the bottom of your workflow.py file, add:
 
-if __name__ == "__main__":
-    # Test state
-    test_state = {
-        "code": """
-def hello():
-    pass
 
-def complex_function():
-    # TODO: optimize this
-    # FIXME: bug here
-    if True:afdggggggggggggggggggggg
-    gas
-    f
-    gsadf
-    gs
-    dfhg
-    sdf
-    h
-    sdgfh
-    rety34w56y325
-    46
-        for i in range(10):
-            print(i)
-""",
-        "functions": [],
-        "avg_complexity": 0.0,
-        "issues": 0,
-        "quality_score": 0.0,
-        "threshold": 80,
-        "suggestions": []
-    }
+# if __name__ == "__main__":
     
-    print("Initial State:")
-    print(f"Code length: {len(test_state['code'])} chars")
-    print(f"Issues: {test_state['issues']}")
-    print()
+#     test_state = {
+#         "code": """
+# def hello():
+#     pass
+
+# def complex_function():
+#     # TODO: optimize this
+#     # FIXME: bug here
+#     if True:
+#         for i in range(10):
+#             print(i)
+# """,
+#         "functions": [],
+#         "avg_complexity": 0.0,
+#         "issues": 0,
+#         "quality_score": 0.0,
+#         "threshold": 80,
+#         "suggestions": []
+#     }
     
-    # Run the workflow
-    final_state = run_graph("extract_functions", edges, test_state)
+#     print("Initial State:")
+#     print(f"Code length: {len(test_state['code'])} chars")
+#     print(f"Issues: {test_state['issues']}")
+#     print()
     
-    print("Final State:")
-    print(f"Functions found: {len(final_state['functions'])}")
-    print(f"Functions: {final_state['functions']}")
-    print(f"Average complexity: {final_state['avg_complexity']:.2f}")
-    print(f"Issues found: {final_state['issues']}")
-    print(f"Quality score: {final_state['quality_score']:.2f}")
-    print(f"Threshold: {final_state['threshold']}")
-    print(f"\nSuggestions:")
-    for suggestion in final_state['suggestions']:
-        print(f"  - {suggestion}")
+#     # Run the workflow
+#     final_state = run_graph("extract_functions", edges, test_state)
+    
+#     print("Final State:")
+#     print(f"Functions found: {len(final_state['functions'])}")
+#     print(f"Functions: {final_state['functions']}")
+#     print(f"Average complexity: {final_state['avg_complexity']:.2f}")
+#     print(f"Issues found: {final_state['issues']}")
+#     print(f"Quality score: {final_state['quality_score']:.2f}")
+#     print(f"Threshold: {final_state['threshold']}")
+#     print(f"\nSuggestions:")
+#     for suggestion in final_state['suggestions']:
+#         print(f"  - {suggestion}")
+     

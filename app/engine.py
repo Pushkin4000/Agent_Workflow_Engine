@@ -1,6 +1,6 @@
 import uuid
 from typing import Dict, Any, Optional
-from workflows import NODE_REGISTRY
+from app.workflows import NODE_REGISTRY
 
 # In-memory stores
 GRAPHS: Dict[str, Dict] = {}
