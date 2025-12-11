@@ -76,6 +76,6 @@ def run_graph(graph_id: str, initial_state: Dict[str, Any], max_steps: int = 100
         "status": status
     }
 
-# retrieve a run by its id.
+# retrieve a run by its id, func.
 def get_run(run_id: str) -> Optional[Dict]:
     return RUNS.get(run_id)

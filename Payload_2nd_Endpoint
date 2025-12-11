@@ -1,0 +1,13 @@
+{
+  "graph_id": "your-graph-id-from-step-1", 
+  "initial_state": {
+    "code": "def hello():\n    pass\n\ndef test():\n    # TODO: fix\n    pass",
+    "functions": [],
+    "avg_complexity": 0.0,
+    "issues": 0,
+    "quality_score": 0.0,
+    "threshold": 80,
+    "suggestions": [],
+    "loop_count": 0
+  }
+}

@@ -18,7 +18,7 @@ class RunRequest(BaseModel):
     initial_state: Dict[str, Any]
 
 
-# Endpoint for creating ids and making graphs.
+# 1st Endpoint for creating ids and making graphs.
 @app.post("/graph/create")
 def create_new_graph(payload: GraphCreate):
     try:
@@ -33,7 +33,7 @@ def create_new_graph(payload: GraphCreate):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Endpoint for running existing graphs.
+# 2nd Endpoint for running existing graphs.
 @app.post("/graph/run")
 def run_existing_graph(payload: RunRequest):
     try:
@@ -45,7 +45,7 @@ def run_existing_graph(payload: RunRequest):
         raise HTTPException(status_code=500, detail=str(e))
     
 
-# Endpoint for retrieving run state by run id.
+# 3rd Endpoint for retrieving run state by run id.
 @app.get("/graph/state/{run_id}")
 def get_run_state(run_id: str):
     result = get_run(run_id)
